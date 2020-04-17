@@ -4,4 +4,5 @@ class Url {
   static const VERSION = "v1/";
 
   static const VISITOR_LOGIN = "v1/account/virtual/login";
+  static const GET_HOME_PAGE_TAG = "v1/tag/list/1";
 }
