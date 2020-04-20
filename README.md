@@ -15,5 +15,11 @@
 
 ## 4.dio请求回来的数据不是Json字符串而是json对象
     设置:responseType: ResponseType.plain
+    
+    
+## 5.倒计时
+    Timer timer = new Timer(new Duration(seconds: 10), () {
+        // 只在倒计时结束时回调
+    });    
 
 

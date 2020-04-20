@@ -10,36 +10,40 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin{
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   TabController _control;
-  List<String> _tableList;
+  List<dynamic> _tableList;
   @override
   void initState() {
-    _control = TabController(initialIndex: 0,length: 4,vsync: this);
     _tableList = List();
-
-    DioManager().request(method: "get",url: Url.GET_HOME_PAGE_TAG,onSuccess: (data){
-
-//      this.setState((){
-////        _tableList.addAll(data[])
-//      });
-    },onError: (error){});
-
+    _control = TabController(initialIndex: 0,length: _tableList.length,vsync: this);
     super.initState();
   }
+
+  getTabData(){
+    DioManager().request(method: "get",url: Url.GET_HOME_PAGE_TAG,onSuccess: (data){
+      setState(() {
+        _tableList.addAll(data);
+        _control =  TabController(initialIndex: 0,length: _tableList.length,vsync: this);
+      });
+    },onError: (error){
+      print(error);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text("sadsa"));
-//    return Column(children: <Widget>[
-//      TabBar(
-//        isScrollable: false,
-//         controller: _control,
-//         tabs:_tableList.map((item){
-//           return Tab(
-//             text: item,
-//           );
-//         }).toList()
-//      ),
+    getTabData();
+    return Column(children: <Widget>[
+      TabBar(
+        isScrollable: false,
+         controller: _control,
+         tabs:_tableList.map((item){
+           return Tab(
+             text: item["name"],
+           );
+         }).toList()
+      ),
 //      TabBarView(
 //        controller: _control,
 //        children: _tableList.map((item) {
@@ -48,6 +52,6 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
 //          ],);
 //        }).toList(),
 //      )
-//    ],);
+    ],);
   }
 }

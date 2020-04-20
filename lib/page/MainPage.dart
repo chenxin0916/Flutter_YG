@@ -52,20 +52,6 @@ class _MainPageState extends State<MainPage>
   void initState() {
     super.initState();
     _currentIndex = 0;
-    DioManager().request<LoginSuccessResponse>(
-        method: "get",
-        url: Url.VISITOR_LOGIN,
-        params: {},
-        onSuccess: (data){
-          print("============================" + data["token"]);
-          DioManager().init(data["token"]);
-        },
-        onError: (error){
-          print("============================");
-          print(error.errorCode);
-          print("============================");
-        }
-        );
   }
 
   @override

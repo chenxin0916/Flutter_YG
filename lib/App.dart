@@ -12,7 +12,7 @@ class Main extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: SplashPage(),
+      home: SplashPage()
     );
   }
 }
